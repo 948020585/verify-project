@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screenshots | 作品截图</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="site-wrap topbar-inner">
+        <a class="brand" href="./index.html">LIU YIFEI ARCHIVE</a>
+        <nav class="nav">
+          <a href="./index.html" data-i18n="navHome">首页</a>
+          <a href="./works.html" data-i18n="navWorks">作品</a>
+          <a href="./analysis.html" data-i18n="navAnalysis">人物分析</a>
+          <a class="active" href="./gallery.html" data-i18n="navGallery">作品截图</a>
+        </nav>
+        <button id="lang-switch" class="lang-switch" type="button">EN</button>
+      </div>
+    </header>
+
+    <main class="site-wrap">
+      <section class="section" style="margin-top: 56px">
+        <span class="kicker" data-zh="作品截图" data-en="Visual Gallery">作品截图</span>
+        <h2 data-zh="公开宣传图集" data-en="Public Promotional Stills">公开宣传图集</h2>
+        <p
+          class="lead"
+          data-zh="以下图集选用可公开访问的影视条目海报缩略图，作为作品视觉索引。点击可进入作品页查看完整信息与外链。"
+          data-en="This gallery uses publicly accessible promotional thumbnails as a visual index. Open the Works page for full details and external references."
+        >
+          以下图集选用可公开访问的影视条目海报缩略图，作为作品视觉索引。点击可进入作品页查看完整信息与外链。
+        </p>
+      </section>
+
+      <section class="section" style="margin-top: 16px">
+        <div id="gallery-grid" class="gallery-grid"></div>
+      </section>
+
+      <section class="footer-note">
+        <p
+          data-zh="版权说明：本站不存储原创影视素材，仅引用公开页面缩略图用于目录展示。若权利方提出异议，可立即移除。"
+          data-en="Copyright note: this site does not host original film footage; it references public-page thumbnails for catalog display only."
+        >
+          版权说明：本站不存储原创影视素材，仅引用公开页面缩略图用于目录展示。若权利方提出异议，可立即移除。
+        </p>
+      </section>
+    </main>
+
+    <script src="./assets/works-data.js"></script>
+    <script src="./assets/app.js"></script>
+  </body>
+</html>

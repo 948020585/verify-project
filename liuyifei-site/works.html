@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Works | 刘亦菲作品库</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="site-wrap topbar-inner">
+        <a class="brand" href="./index.html">LIU YIFEI ARCHIVE</a>
+        <nav class="nav">
+          <a href="./index.html" data-i18n="navHome">首页</a>
+          <a class="active" href="./works.html" data-i18n="navWorks">作品</a>
+          <a href="./analysis.html" data-i18n="navAnalysis">人物分析</a>
+          <a href="./gallery.html" data-i18n="navGallery">作品截图</a>
+        </nav>
+        <button id="lang-switch" class="lang-switch" type="button">EN</button>
+      </div>
+    </header>
+
+    <main class="site-wrap">
+      <section class="section" style="margin-top: 56px">
+        <span class="kicker" data-zh="作品简介" data-en="Works Overview">作品简介</span>
+        <h2 data-zh="影视作品全览" data-en="Filmography at a Glance">影视作品全览</h2>
+        <p
+          class="lead"
+          data-zh="按时间轴整理主要影视作品，覆盖电视剧与电影。每张卡片附有维基、IMDb、豆瓣入口，便于快速查证和延伸阅读。"
+          data-en="A chronological list of major TV and film works. Each card includes Wiki, IMDb, and Douban links for quick verification and deeper reading."
+        >
+          按时间轴整理主要影视作品，覆盖电视剧与电影。每张卡片附有维基、IMDb、豆瓣入口，便于快速查证和延伸阅读。
+        </p>
+      </section>
+
+      <section class="section" style="margin-top: 18px">
+        <div id="works-filter" style="display: flex; gap: 10px; flex-wrap: wrap"></div>
+        <div id="works-grid" class="card-grid"></div>
+      </section>
+
+      <section class="footer-note">
+        <p
+          data-zh="提示：若个别外链在你的网络环境打不开，可优先使用同卡片内的其他来源链接（Wiki / IMDb / 豆瓣）。"
+          data-en="Tip: If one source is unavailable in your network, use the alternative links on the same card (Wiki / IMDb / Douban)."
+        >
+          提示：若个别外链在你的网络环境打不开，可优先使用同卡片内的其他来源链接（Wiki / IMDb / 豆瓣）。
+        </p>
+      </section>
+    </main>
+
+    <script src="./assets/works-data.js"></script>
+    <script src="./assets/app.js"></script>
+  </body>
+</html>
