@@ -204,3 +204,81 @@ window.WORKS_DATA = [
     }
   }
 ];
+
+window.NEWS_FEED = [
+  {
+    date: "2026-02-09",
+    titleZh: "站点第一版上线",
+    titleEn: "Site Version 1 Released",
+    summaryZh: "完成多页结构、双语切换、作品链接与海报风视觉样式。",
+    summaryEn: "The first release shipped with multi-page structure, bilingual toggle, work links, and a poster-style visual language.",
+    link: "./index.html"
+  },
+  {
+    date: "2026-02-09",
+    titleZh: "增强项：最新动态模块",
+    titleEn: "Enhancement: Latest Updates Module",
+    summaryZh: "新增可维护的动态卡片区，后续可持续追加新闻与维护记录。",
+    summaryEn: "Added a maintainable updates feed section for future news and maintenance logs.",
+    link: "./index.html#latest-updates"
+  },
+  {
+    date: "2026-02-09",
+    titleZh: "增强项：评分与奖项可视化",
+    titleEn: "Enhancement: Ratings & Awards Visualization",
+    summaryZh: "在人物分析页加入评分快照条形图与奖项节点时间线。",
+    summaryEn: "Added rating snapshot bars and an awards milestone timeline to the analysis page.",
+    link: "./analysis.html#awards-visual"
+  },
+  {
+    date: "2026-02-09",
+    titleZh: "增强项：海报动效",
+    titleEn: "Enhancement: Poster Motion",
+    summaryZh: "加入开场揭幕动画、滚动视差与卡片渐显效果。",
+    summaryEn: "Introduced opening reveal animation, scroll parallax, and staggered card fade-ins.",
+    link: "./index.html"
+  }
+];
+
+window.RATING_SNAPSHOT = [
+  { id: "chinese-paladin", rating: 9.1, votes: 421668 },
+  { id: "demi-gods", rating: 8.6, votes: 139604 },
+  { id: "noble-family", rating: 8.5, votes: 168201 },
+  { id: "dream-of-splendor", rating: 7.9, votes: 917889 },
+  { id: "condor-heroes", rating: 7.8, votes: 114549 },
+  { id: "forbidden-kingdom", rating: 5.8, votes: 202476 },
+  { id: "the-four", rating: 5.4, votes: 128999 },
+  { id: "assassins", rating: 5.3, votes: 67612 },
+  { id: "third-way", rating: 5.3, votes: 83656 }
+];
+
+window.AWARD_MILESTONES = [
+  {
+    year: 2013,
+    titleZh: "澳门国际电影节金莲花奖最佳女主角",
+    titleEn: "Best Actress, Macau International Movie Festival",
+    workZh: "《铜雀台》",
+    workEn: "The Assassins"
+  },
+  {
+    year: 2022,
+    titleZh: "澳门国际电视节最佳女主角",
+    titleEn: "Best Actress, Macau International TV Festival",
+    workZh: "《梦华录》",
+    workEn: "A Dream of Splendor"
+  },
+  {
+    year: 2023,
+    titleZh: "澳门国际电视节最佳女主角",
+    titleEn: "Best Actress, Macau International TV Festival",
+    workZh: "《去有风的地方》",
+    workEn: "Meet Yourself"
+  },
+  {
+    year: 2025,
+    titleZh: "中国电视剧导演大会年度女演员",
+    titleEn: "Actress of the Year, China TV Directors Congress",
+    workZh: "《玫瑰的故事》",
+    workEn: "The Tale of Rose"
+  }
+];

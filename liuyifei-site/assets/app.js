@@ -13,7 +13,11 @@
       linkImdb: "IMDb",
       linkDouban: "豆瓣",
       typeTv: "电视剧",
-      typeFilm: "电影"
+      typeFilm: "电影",
+      roleLabel: "角色",
+      sourceLabel: "来源",
+      votesLabel: "评价人数",
+      updateLink: "查看页面"
     },
     en: {
       navHome: "Home",
@@ -28,7 +32,11 @@
       linkImdb: "IMDb",
       linkDouban: "Douban",
       typeTv: "TV Series",
-      typeFilm: "Film"
+      typeFilm: "Film",
+      roleLabel: "Role",
+      sourceLabel: "Source",
+      votesLabel: "Votes",
+      updateLink: "Open"
     }
   };
 
@@ -37,6 +45,11 @@
 
   function text(key) {
     return i18n[currentLang][key] || key;
+  }
+
+  function getWorkById(id) {
+    if (!window.WORKS_DATA) return null;
+    return window.WORKS_DATA.find((item) => item.id === id) || null;
   }
 
   function applyI18n() {
@@ -59,8 +72,9 @@
 
   function createWorkCard(item) {
     const card = document.createElement("article");
-    card.className = "work-card";
+    card.className = "work-card reveal";
     card.dataset.type = item.type;
+    card.setAttribute("data-reveal", "");
 
     const labelType = item.type === "tv" ? text("typeTv") : text("typeFilm");
     const title = currentLang === "zh" ? item.titleZh : item.titleEn;
@@ -75,7 +89,7 @@
           <span class="badge">${labelType}</span>
         </div>
         <h3 class="work-title">${title}</h3>
-        <p class="work-role">${currentLang === "zh" ? "角色" : "Role"}: ${role}</p>
+        <p class="work-role">${text("roleLabel")}: ${role}</p>
         <p class="work-summary">${summary}</p>
         <div class="link-row">
           <a href="${item.links.wiki}" target="_blank" rel="noopener">${text("linkWiki")}</a>
@@ -122,7 +136,8 @@
     window.WORKS_DATA.forEach((item) => {
       const title = currentLang === "zh" ? item.titleZh : item.titleEn;
       const figure = document.createElement("figure");
-      figure.className = "gallery-item";
+      figure.className = "gallery-item reveal";
+      figure.setAttribute("data-reveal", "");
       figure.innerHTML = `
         <img src="${item.poster}" alt="${title}" loading="lazy" referrerpolicy="no-referrer" />
         <figcaption>${title} (${item.year})</figcaption>
@@ -153,8 +168,154 @@
         });
         btn.style.borderColor = "rgba(228, 179, 90, 0.6)";
         renderWorks(def.key);
+        setupReveal();
       });
       bar.appendChild(btn);
+    });
+  }
+
+  function renderNews() {
+    const mount = document.querySelector("#news-grid");
+    if (!mount || !window.NEWS_FEED) return;
+
+    mount.innerHTML = "";
+    window.NEWS_FEED.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "news-card reveal";
+      card.setAttribute("data-reveal", "");
+      card.innerHTML = `
+        <span class="news-date">${item.date}</span>
+        <h3 class="news-title">${currentLang === "zh" ? item.titleZh : item.titleEn}</h3>
+        <p class="news-summary">${currentLang === "zh" ? item.summaryZh : item.summaryEn}</p>
+        <a class="news-link" href="${item.link}">${text("updateLink")} →</a>
+      `;
+      mount.appendChild(card);
+    });
+  }
+
+  function renderRatingBars() {
+    const mount = document.querySelector("#rating-bars");
+    if (!mount || !window.RATING_SNAPSHOT) return;
+
+    mount.innerHTML = "";
+    const sorted = window.RATING_SNAPSHOT
+      .slice()
+      .sort((a, b) => b.rating - a.rating);
+
+    sorted.forEach((row) => {
+      const work = getWorkById(row.id);
+      if (!work) return;
+
+      const name = currentLang === "zh" ? work.titleZh : work.titleEn;
+      const block = document.createElement("div");
+      block.className = "metric-row";
+      block.innerHTML = `
+        <div class="metric-meta">
+          <span class="metric-title">${name}</span>
+          <span class="metric-value">${row.rating.toFixed(1)} / 10</span>
+        </div>
+        <div class="metric-track"><span class="metric-fill" data-width="${row.rating * 10}"></span></div>
+        <p class="metric-sub">${text("sourceLabel")}: Douban Snapshot · ${text("votesLabel")}: ${row.votes.toLocaleString()}</p>
+      `;
+      mount.appendChild(block);
+    });
+
+    // Animate bars after layout paint.
+    requestAnimationFrame(() => {
+      mount.querySelectorAll(".metric-fill").forEach((el) => {
+        el.style.width = `${el.getAttribute("data-width")}%`;
+      });
+    });
+  }
+
+  function renderAwards() {
+    const mount = document.querySelector("#awards-timeline");
+    if (!mount || !window.AWARD_MILESTONES) return;
+
+    mount.innerHTML = "";
+    window.AWARD_MILESTONES
+      .slice()
+      .sort((a, b) => a.year - b.year)
+      .forEach((item) => {
+        const node = document.createElement("article");
+        node.className = "mini-item";
+        node.innerHTML = `
+          <h4>${item.year} · ${currentLang === "zh" ? item.titleZh : item.titleEn}</h4>
+          <p>${currentLang === "zh" ? item.workZh : item.workEn}</p>
+        `;
+        mount.appendChild(node);
+      });
+  }
+
+  function setupReveal() {
+    const nodes = document.querySelectorAll("[data-reveal]");
+    if (!nodes.length) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      nodes.forEach((node) => node.classList.add("in"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("in");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -8% 0px"
+      }
+    );
+
+    nodes.forEach((node, index) => {
+      node.style.transitionDelay = `${Math.min(index * 35, 280)}ms`;
+      observer.observe(node);
+    });
+  }
+
+  function setupParallax() {
+    const moving = Array.from(document.querySelectorAll("[data-parallax]"));
+    if (!moving.length || window.matchMedia("(max-width: 900px)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const onScroll = () => {
+      const vh = window.innerHeight;
+      moving.forEach((el) => {
+        const speed = Number(el.getAttribute("data-parallax")) || 0;
+        const rect = el.getBoundingClientRect();
+        const progress = (rect.top + rect.height * 0.5 - vh * 0.5) / vh;
+        const shift = progress * speed * -80;
+        if (el.classList.contains("poster-focus")) {
+          el.style.transform = `translateY(${shift.toFixed(2)}px)`;
+        } else {
+          el.style.transform = `translateY(${shift.toFixed(2)}px)`;
+        }
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  function setupPosterTilt() {
+    const poster = document.querySelector(".poster-focus");
+    if (!poster || window.matchMedia("(max-width: 900px)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    poster.addEventListener("mousemove", (event) => {
+      const rect = poster.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      const rotateY = (x - 0.5) * 10;
+      const rotateX = (0.5 - y) * 8;
+      poster.style.transform = `translateY(-2px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+    });
+
+    poster.addEventListener("mouseleave", () => {
+      poster.style.transform = "translateY(0) rotateX(0deg) rotateY(0deg)";
     });
   }
 
@@ -164,6 +325,10 @@
     renderWorks("all");
     renderFeatured();
     renderGallery();
+    renderNews();
+    renderRatingBars();
+    renderAwards();
+    setupReveal();
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -177,5 +342,7 @@
     }
 
     repaint();
+    setupParallax();
+    setupPosterTilt();
   });
 })();

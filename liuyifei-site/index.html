@@ -24,8 +24,8 @@
     </header>
 
     <main class="site-wrap">
-      <section class="hero">
-        <div class="hero-copy">
+      <section class="hero reveal" data-reveal>
+        <div class="hero-copy" data-parallax="0.18">
           <span class="kicker" data-zh="影视生涯档案" data-en="Career Archive">影视生涯档案</span>
           <h1 data-zh="刘亦菲" data-en="Liu Yifei">刘亦菲</h1>
           <p
@@ -36,7 +36,7 @@
           </p>
         </div>
 
-        <aside class="poster-card">
+        <aside class="poster-card poster-focus reveal" data-reveal data-parallax="0.32">
           <img src="https://upload.wikimedia.org/wikipedia/en/1/17/Mulan_%282020_film%29_poster.jpg" alt="Mulan poster" referrerpolicy="no-referrer" />
           <div class="poster-info">
             <p class="title" data-zh="国际阶段代表作" data-en="International Breakout">国际阶段代表作</p>
@@ -85,6 +85,18 @@
           从古装经典到现代都市，再到国际商业电影，这里先展示三部高辨识度节点作品。
         </p>
         <div id="featured-grid" class="card-grid"></div>
+      </section>
+
+      <section id="latest-updates" class="section">
+        <h2 data-zh="最新动态" data-en="Latest Updates">最新动态</h2>
+        <p
+          class="lead"
+          data-zh="这里记录网站与内容的更新日志。后续每次新增作品、截图或分析都会在此刷新。"
+          data-en="This feed tracks site and content updates. New works, screenshots, and analysis updates will appear here."
+        >
+          这里记录网站与内容的更新日志。后续每次新增作品、截图或分析都会在此刷新。
+        </p>
+        <div id="news-grid" class="news-grid"></div>
       </section>
 
       <section class="footer-note">
