@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake - verify-project</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="panel">
+        <h1>贪吃蛇</h1>
+        <p class="subtitle">方向键 / WASD 控制，移动端可用下方按钮。</p>
+
+        <div class="stats" role="status" aria-live="polite">
+          <span>分数: <strong id="score">0</strong></span>
+          <span>最高分: <strong id="best">0</strong></span>
+          <span id="state">待开始</span>
+        </div>
+
+        <div class="actions">
+          <button id="startBtn" type="button">开始</button>
+          <button id="pauseBtn" type="button">暂停</button>
+          <button id="restartBtn" type="button">重开</button>
+        </div>
+      </section>
+
+      <section class="stage-wrap">
+        <canvas id="stage" width="576" height="576" aria-label="贪吃蛇游戏画布"></canvas>
+      </section>
+
+      <section class="touch-pad" aria-label="移动方向控制">
+        <button data-dir="up" type="button">↑</button>
+        <div class="middle">
+          <button data-dir="left" type="button">←</button>
+          <button data-dir="down" type="button">↓</button>
+          <button data-dir="right" type="button">→</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="./game.js"></script>
+  </body>
+</html>
